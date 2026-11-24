@@ -1,0 +1,32 @@
+{
+  "name": "hookrelay-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "styled-components": "^6.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "typescript": "^5",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  },
+  "description": "Dashboard for hookrelay: endpoints, deliveries and redelivery of failed webhooks.",
+  "author": "Welson Dutra",
+  "license": "MIT"
+}
