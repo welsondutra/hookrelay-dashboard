@@ -37,3 +37,23 @@ export function formatDuration(totalSeconds: number): string {
   if (minutes > 0) return `${minutes} m`;
   return `${totalSeconds} s`;
 }
+
+/** Time until a future moment: "due now", "in 5 min", "in 3 h", "in 2 d". */
+export function formatUntil(iso: string, now: Date = new Date()): string {
+  const seconds = Math.round((new Date(iso).getTime() - now.getTime()) / 1000);
+  if (seconds <= 0) return 'due now';
+  if (seconds < 60) return `in ${seconds} s`;
+  if (seconds < 3600) return `in ${Math.floor(seconds / 60)} min`;
+  if (seconds < 86400) return `in ${Math.floor(seconds / 3600)} h`;
+  return `in ${Math.floor(seconds / 86400)} d`;
+}
+
+/** "https://api.example.com/hooks/orders" -> "api.example.com/hooks/orders", without the bare root path. */
+export function describeUrl(url: string): string {
+  try {
+    const { host, pathname, search } = new URL(url);
+    return `${host}${pathname === '/' ? '' : pathname}${search}`;
+  } catch {
+    return url;
+  }
+}
