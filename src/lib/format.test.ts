@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { formatAgo, formatCount, formatDateTime, formatDuration, orDash, shortId } from './format';
+import { describeUrl, formatAgo, formatCount, formatDateTime, formatDuration, formatUntil, orDash, shortId } from './format';
 
 describe('format', () => {
   it('adds thousands separators to counts', () => {
@@ -30,5 +30,19 @@ describe('format', () => {
     expect(formatDuration(3725)).toBe('1 h 2 m');
     expect(formatDuration(95)).toBe('1 m');
     expect(formatDuration(12)).toBe('12 s');
+  });
+
+  it('describes the time until a future moment', () => {
+    const now = new Date('2026-11-18T12:00:00Z');
+    expect(formatUntil('2026-11-18T11:59:00Z', now)).toBe('due now');
+    expect(formatUntil('2026-11-18T12:00:30Z', now)).toBe('in 30 s');
+    expect(formatUntil('2026-11-18T12:05:00Z', now)).toBe('in 5 min');
+    expect(formatUntil('2026-11-18T15:00:00Z', now)).toBe('in 3 h');
+  });
+
+  it('shortens urls for display', () => {
+    expect(describeUrl('https://api.example.com/hooks/orders')).toBe('api.example.com/hooks/orders');
+    expect(describeUrl('http://localhost:9000/')).toBe('localhost:9000');
+    expect(describeUrl('not a url')).toBe('not a url');
   });
 });
